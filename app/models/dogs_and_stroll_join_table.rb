@@ -1,0 +1,2 @@
+class DogsAndStrollJoinTable < ApplicationRecord
+end
