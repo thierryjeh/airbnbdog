@@ -10,40 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_30_213633) do
+ActiveRecord::Schema.define(version: 2019_10_24_094230) do
 
   create_table "cities", force: :cascade do |t|
-    t.string "name"
+    t.string "city_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "dog_sitters", force: :cascade do |t|
+    t.string "name"
+    t.integer "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_dog_sitters_on_city_id"
+  end
+
+  create_table "dog_strolls", force: :cascade do |t|
+    t.integer "stroll_id"
+    t.integer "dog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dog_id"], name: "index_dog_strolls_on_dog_id"
+    t.index ["stroll_id"], name: "index_dog_strolls_on_stroll_id"
+  end
+
   create_table "dogs", force: :cascade do |t|
     t.string "name"
-    t.string "breed"
     t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_dogs_on_city_id"
   end
 
-  create_table "dogs_and_stroll_join_tables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "dogsitters", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "strolls", force: :cascade do |t|
     t.datetime "date"
-    t.string "place"
+    t.integer "dog_sitter_id"
+    t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_strolls_on_city_id"
+    t.index ["dog_sitter_id"], name: "index_strolls_on_dog_sitter_id"
   end
 
 end

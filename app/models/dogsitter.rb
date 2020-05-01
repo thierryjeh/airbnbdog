@@ -1,2 +1,0 @@
-class Dogsitter < ApplicationRecord
-end
